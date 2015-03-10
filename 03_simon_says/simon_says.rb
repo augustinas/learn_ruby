@@ -19,5 +19,6 @@ def first_word(string)
 end
 
 def titleize(string)
-  string.split(" ").each_with_index.map { |word, index| (word != "the" && word != "over" && word != "and") || index == 0 ? word.capitalize : word }.join(" ")
+  small_words = ["the", "and", "over"]
+  string.split(" ").each_with_index.map { |word, index| !small_words.include?(word) || index == 0 ? word.capitalize : word }.join(" ")
 end

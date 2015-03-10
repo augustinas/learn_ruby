@@ -3,16 +3,12 @@ def translate(string)
     if stringgy[0].match(/[aeiou]/)
       stringgy + "ay"
     else
-      cons_num = 0
-      until stringgy[cons_num].match(/[aeiou]/)
-        cons_num += 1
+      first_vowel = stringgy.index(/[aeiou]/)
+      if stringgy[first_vowel-1..first_vowel] == "qu"
+        stringgy[first_vowel+1..-1] + stringgy[0..first_vowel] + "ay"
+      else
+        stringgy[first_vowel..-1] + stringgy[0..first_vowel-1] + "ay"
       end
-
-      cons_num = 2 if stringgy[0..1] == "qu"
-      cons_num = 3 if !stringgy[0].match(/[aeiou]/) && stringgy[1..2] == "qu"
-
-      modified_string = stringgy.delete(stringgy.slice(0, cons_num))
-      modified_string + stringgy.slice(0, cons_num) + "ay"
     end
   end.join(" ")
 end
